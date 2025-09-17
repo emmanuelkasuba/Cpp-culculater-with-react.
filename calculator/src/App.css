@@ -1,0 +1,17 @@
+
+.calculator {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+input, select, button {
+  margin: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+.error {
+  color: red;
+}
