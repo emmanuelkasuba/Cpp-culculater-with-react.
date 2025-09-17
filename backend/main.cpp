@@ -1,16 +1,13 @@
-#include "crow_all.h"  // Use this if you're using the header-only version
+#include <crow.h> 
+#include <crow/json.h> 
+int main() {crow::SimpleApp app;
+crow::SimpleApp app;
+CROW_ROUTE(app, "/")([]()
+                     { return "Crow server is running!"; });
 
-int main() {
-    crow::SimpleApp app;
-
-    // Root route
-    CROW_ROUTE(app, "/")([](){
-        return "Crow server is running!";
-    });
-
-    // Calculator route
-    CROW_ROUTE(app, "/calculate").methods("POST"_method)
-    ([](const crow::request& req) {
+// Calculator route
+CROW_ROUTE(app, "/calculate").methods("POST"_method)([](const crow::request &req)
+                                                     {
         auto json = crow::json::load(req.body);
         if (!json) {
             return crow::response(400, "Invalid JSON");
@@ -32,9 +29,8 @@ int main() {
         }
 
         crow::json::wvalue response({{"result", result}});
-        return crow::response(response);
-    });
+        return crow::response(response); });
 
-    app.port(18080).multithreaded().run();
-    return 0;
+app.port(18080).multithreaded().run();
+return 0;
 }
